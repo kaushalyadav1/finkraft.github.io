@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+    <script>
+
+        let X = "OldString:I am kaushal form Bihar"
+        let Y ="NewString:I am kaushal living in Bangalore"
+        let m = X.length
+        let n = Y.length
+
+        const printLCSubStr=(X,y,m,n)=>{
+            let LCSuff = new Array(m+1)
+            let len = 0
+            let row = 0 , col = 0
+
+            for(let i=0;i<=m;i++){
+                LCSuff[i] = Array(n+1)
+                for(let j=0;j<=n;j++){
+                    LCSuff[i][j] = 0
+                    if(i==0 || j==0)
+                        LCSuff[i][j]=0
+                    else if(X[i-1] == Y[j-1]){
+                        LCSuff[i][j] = LCSuff[i-1][j-1]+1
+                        if(len<LCSuff[i][j]){
+                            len = LCSuff[i][j]
+                            row = i
+                            col = j
+                        }
+                    }
+                    else
+                        LCSuff[i][j] = 0
+                }
+            }
+
+            if(len == 0){
+                document.write("No common substring")
+                return
+            }
+
+            let result = ""
+
+            while(LCSuff[row][col]!=0){
+                result = X[row-1] + result
+                --len
+                row--
+                col--
+            }
+
+            document.write(result)
+        }
+
+        printLCSubStr(X,Y,m,n)
+    </script>
+
+</html>
